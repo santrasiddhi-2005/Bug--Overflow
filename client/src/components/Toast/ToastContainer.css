@@ -1,0 +1,19 @@
+.app-toast {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 5000;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.app-toast.error {
+  background-color: #d73a49;
+}
+
+.app-toast.success {
+  background-color: #2e7d32;
+}

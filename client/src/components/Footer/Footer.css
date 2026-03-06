@@ -1,0 +1,32 @@
+.global-footer {
+  width: 100%;
+  background: #000000;
+  color: #f4f4f4;
+  border-top: 1px solid #1f1f1f;
+}
+
+.global-footer-inner {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  font-size: 12px;
+  letter-spacing: 0.2px;
+}
+
+.global-footer-inner p {
+  margin: 0;
+  color: inherit;
+}
+
+@media screen and (max-width: 760px) {
+  .global-footer-inner {
+    flex-direction: column;
+    text-align: center;
+    gap: 6px;
+    padding: 10px 14px;
+  }
+}

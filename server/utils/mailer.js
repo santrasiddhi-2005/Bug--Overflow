@@ -12,14 +12,14 @@ const canSendEmail =
 
 const transporter = canSendEmail
   ? nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: String(process.env.SMTP_SECURE || "false") === "true",
-      auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS,
-      },
-    })
+    host: process.env.SMTP_HOST,
+    port: Number(process.env.SMTP_PORT),
+    secure: String(process.env.SMTP_SECURE || "false") === "true",
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
+    },
+  })
   : null;
 
 export const sendOtpEmail = async ({ to, subject, otp, purpose }) => {
@@ -38,13 +38,30 @@ export const sendOtpEmail = async ({ to, subject, otp, purpose }) => {
     return { sent: false, fallback: true };
   }
 
-  await transporter.sendMail({
-    from: fromEmail,
-    to,
-    subject,
-    text: `Your OTP for ${purpose} is ${otp}. It expires in 10 minutes.`,
-    html,
-  });
+  if (transporter) {
+    transporter.verify((error, success) => {
+      if (error) {
+        console.log("SMTP ERROR:", error);
+      } else {
+        console.log("SMTP server ready");
+      }
+    });
+  }
+
+  try {
+    await transporter.sendMail({
+      from: fromEmail,
+      to,
+      subject,
+      text: `Your OTP for ${purpose} is ${otp}. It expires in 10 minutes.`,
+      html,
+    });
+
+    return { sent: true, fallback: false };
+  } catch (error) {
+    console.error("EMAIL ERROR:", error);
+    throw error;
+  }
 
   return { sent: true, fallback: false };
 };

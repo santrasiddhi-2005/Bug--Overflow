@@ -13,6 +13,7 @@ const canSendEmail =
 const transporter = canSendEmail
   ? nodemailer.createTransport({
     host: process.env.SMTP_HOST,
+    family: 4,
     port: Number(process.env.SMTP_PORT),
     secure: String(process.env.SMTP_SECURE || "false") === "true",
     auth: {

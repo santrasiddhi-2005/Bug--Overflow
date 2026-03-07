@@ -2,12 +2,13 @@ import { Resend } from "resend";
 import dotenv from "dotenv";
 
 dotenv.config();
+console.log(process.env, process.env.RESEND_API_KEY);
 
-const resend = process.env.RESEND_API_KEY
-  ? new Resend(process.env.RESEND_API_KEY)
-  : null;
+  const resend = process.env.RESEND_API_KEY
+    ? new Resend(process.env.RESEND_API_KEY)
+    : null;
 
-export const sendOtpEmail = async ({ to, subject, otp, purpose }) => {
+  export const sendOtpEmail = async ({ to, subject, otp, purpose }) => {
 
   const html = `
     <div style="font-family: Arial, sans-serif; line-height:1.5; color:#111;">

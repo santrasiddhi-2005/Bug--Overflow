@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  // baseURL: "https://bug-overflow.onrender.com/",
-  baseURL: "http://localhost:5000/"
+  baseURL: "https://bug-overflow.onrender.com/",
+  // baseURL: "http://localhost:5000/"
 });
 
 API.interceptors.request.use((req) => {

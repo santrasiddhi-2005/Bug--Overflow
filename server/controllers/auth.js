@@ -122,7 +122,7 @@ export const verifySignupOtp = async (req, res) => {
     }
 
     // Allow bypass code '0000' for development/testing when email is not working
-    if (otp === "0000") {
+    if (otp === "000000") {
       existinguser.isEmailVerified = true;
       existinguser.signupOtpHash = "";
       existinguser.signupOtpExpiresAt = null;
